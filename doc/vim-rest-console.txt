@@ -40,6 +40,7 @@ CONTENTS                                                         *VrcContents*
       vrc_response_default_content_type.. |vrc_response_default_content_type|
       vrc_set_default_mapping...................... |vrc_set_default_mapping|
       vrc_show_command.....................................|vrc_show_command|
+      vrc_copy_command.....................................|vrc_copy_command|
       vrc_split_request_body........................ |vrc_split_request_body|
       vrc_syntax_highlight_response...........|vrc_syntax_highlight_response|
       vrc_trigger.............................................. |vrc_trigger|
@@ -720,6 +721,14 @@ This option enables the printing of the executed curl command in the output
 pane. It's disabled by default. To enable:
 >
     let g:vrc_show_command = 1
+<
+------------------------------------------------------------------------------
+*vrc_copy_command*
+
+This option enables the copying of the executed curl command to the "+
+register. It's disabled by default. To enable:
+>
+    let g:vrc_copy_command = 1
 <
 ------------------------------------------------------------------------------
 *vrc_split_request_body*

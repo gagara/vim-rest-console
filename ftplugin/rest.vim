@@ -727,6 +727,7 @@ function! s:RunQuery(start, end)
   " requests using consecutive verbs.
   let resumeFrom = a:start
   let shouldShowCommand = s:GetOpt('vrc_show_command', 0)
+  let shouldCopyCommand = s:GetOpt('vrc_copy_command', 0)
   let shouldDebug = s:GetOpt('vrc_debug', 0)
   while resumeFrom < a:end
     let request = s:ParseRequest(a:start, resumeFrom, a:end, globSection)
@@ -748,6 +749,9 @@ function! s:RunQuery(start, end)
     call add(outputInfo['outputChunks'], output)
     if shouldShowCommand
       call add(outputInfo['commands'], curlCmd)
+    endif
+    if shouldCopyCommand
+      let @+ = curlCmd
     endif
 
     if s:HandleResponse(a:start, resumeFrom, a:end, output, outputInfo) != 0
