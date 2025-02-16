@@ -729,7 +729,7 @@ function! s:RunQuery(start, end)
   let shouldShowCommand = s:GetOpt('vrc_show_command', 0)
   let shouldCopyCommand = s:GetOpt('vrc_copy_command', 0)
   let shouldDebug = s:GetOpt('vrc_debug', 0)
-  while resumeFrom < a:end
+  while resumeFrom <= a:end
     let request = s:ParseRequest(a:start, resumeFrom, a:end, globSection)
     if !request.success
       echom request.msg
