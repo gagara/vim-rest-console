@@ -784,6 +784,7 @@ function! s:HandleResponse(start, resumeFrom, end, input, outputInfo)
     let currVerb = s:ParseVerbQuery(a:resumeFrom, a:end)[0]
     let nextVerb = s:ParseVerbQuery(currVerb + 1, a:end)[0]
     if nextVerb == 0 | let nextVerb = a:end | endif
+    let verbCnt = 0
 
     for i in range(currVerb, nextVerb)
         let line = getline(i)
@@ -802,6 +803,9 @@ function! s:HandleResponse(start, resumeFrom, end, input, outputInfo)
                     return code
                 endif
             else
+                let verbCnt += 1
+                call setqflist([], (a:start == a:resumeFrom && verbCnt == 1) ? 'r' : 'a',
+                \    {'items': map(split(output, '\n'), {k,v -> {'text':v, 'lnum':i}})})
                 if s:GetOpt('vrc_show_command', 0)
                     call add(a:outputInfo['commands'], output)
                 endif
